@@ -1,0 +1,16 @@
+name: Main
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Install
+        uses: ianwalter/puppeteer@v2.0.0
+        with:
+          args: yarn
+      - name: Run
+        uses: ianwalter/puppeteer@v2.0.0
+        with:
+          args: yarn start
