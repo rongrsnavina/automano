@@ -14,4 +14,4 @@ const puppeteer = require('puppeteer');
     //Checkout
     await page.click('#checkout-button')
     await browser.close()
-})()
+})().catch((exception) => console.log(exception))

@@ -10,7 +10,10 @@ jobs:
         uses: ianwalter/puppeteer@v4.0.0
         with:
           args: yarn
-      - name: Run
+      - name: Run Browser
         uses: ianwalter/puppeteer@v4.0.0
         with:
           args: yarn start
+        env:
+          MECKANO_USER: ${{ secrets.MECKANO_USER }}
+          MECKANO_PASS: ${{ secrets.MECKANO_PASS }}
