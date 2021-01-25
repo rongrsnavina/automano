@@ -12,6 +12,6 @@ const puppeteer = require('puppeteer');
     await page.waitForNavigation()
 
     //Checkout
-    // await page.click('#checkout-button')
+    await page.click('#checkout-button')
     await browser.close()
 })()
