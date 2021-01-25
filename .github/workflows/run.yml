@@ -7,10 +7,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Install
-        uses: ianwalter/puppeteer
+        uses: ianwalter/puppeteer@v4.0.0
         with:
           args: yarn
       - name: Run
-        uses: ianwalter/puppeteer
+        uses: ianwalter/puppeteer@v4.0.0
         with:
           args: yarn start
