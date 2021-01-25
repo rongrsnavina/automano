@@ -3,7 +3,7 @@ fs.config()
 const puppeteer = require('puppeteer');
 
 (async () => {
-    const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox'] })
+    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] })
     const page = await browser.newPage()
     await page.goto('https://app.meckano.co.il/login.php')
     await page.type('#email', process.env.MECKANO_USER)
