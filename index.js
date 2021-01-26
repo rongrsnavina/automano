@@ -2,7 +2,7 @@ const fs = require('dotenv');
 fs.config()
 const puppeteer = require('puppeteer');
 
-const isDebug = true;
+const isDebug = false;
 
 (async () => {
     const browser = await puppeteer.launch({ headless: !isDebug, args: ['--no-sandbox'] })
