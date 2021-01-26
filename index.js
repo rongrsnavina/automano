@@ -2,8 +2,10 @@ const fs = require('dotenv');
 fs.config()
 const puppeteer = require('puppeteer');
 
+const isDebug = false;
+
 (async () => {
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] })
+    const browser = await puppeteer.launch({ headless: !isDebug, args: ['--no-sandbox'] })
     const page = await browser.newPage()
 
     await page.evaluateOnNewDocument(function() {
@@ -30,11 +32,35 @@ const puppeteer = require('puppeteer');
     await page.click('[name="submit"]')
     await page.waitForNavigation()
 
-    //Checkout
-    await page.waitForSelector('.wrapperCheckout')
-    await page.click('.wrapperCheckout')
+    if ((new Date()).getHours() < 12) {
+        //Checkin
+        if (!isDebug)
+            await new Promise(r => setTimeout(r, Math.floor(Math.random() * 15 * 60 * 1000)));
+        await page.waitForSelector('.wrapperCheckin')
+        await page.click('.wrapperCheckin')
 
-    await new Promise(r => setTimeout(r, 10000));
+        try{
+            await page.waitForSelector('.yesNo')
+            await page.select('.yesNo', 'כן')
+            await page.click('.buttonNext')
+
+            await new Promise(r => setTimeout(r, 3000));
+
+            await page.waitForSelector('.yesNo')
+            await page.select('.yesNo', 'כן')
+            await page.click('.buttonNext')
+        } catch (e) {
+            console.log(e)
+        }
+    } else {
+        //Checkout
+        if (!isDebug)
+            await new Promise(r => setTimeout(r, Math.floor(Math.random() * 15 * 60 * 1000)));
+        await page.waitForSelector('.wrapperCheckout')
+        await page.click('.wrapperCheckout')
+    }
+
+    await new Promise(r => setTimeout(r, 5000));
 
     await browser.close()
 })().catch((exception) => console.log(exception)).finally(() => process.exit())
