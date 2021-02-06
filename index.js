@@ -13,7 +13,7 @@ let page;
   });
   await io.mkdirP(`screenshots`);
   page = await browser.newPage();
-  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+  page.on("console", (msg) => console.log("PAGE LOG:", msg.text()));
 
   await page.evaluateOnNewDocument(function () {
     navigator.geolocation.getCurrentPosition = function (cb) {
@@ -34,18 +34,13 @@ let page;
   });
 
   await page.goto("https://app.meckano.co.il/login.php");
-  await page.waitForSelector("#email");
+  await page.waitForSelector("#email", { visible: true, timeout: 5000 });
   await page.type("#email", process.env.MECKANO_USER);
+  await page.waitForSelector("#password", { visible: true, timeout: 5000 });
   await page.type("#password", process.env.MECKANO_PASS);
   await page.click('[value="התחברות"]');
 
-  // await page.waitForTimeout(10000);
-  // await page.screenshot({
-  //   fullPage: true,
-  //   path: `screenshots/${new Date().getTime()}.png`,
-  // });
-
-  await page.waitForNavigation();
+  await page.waitForNavigation({ timeout: 10000 });
 
   // if ((new Date()).getHours() < 12) {
   //     //Checkin
