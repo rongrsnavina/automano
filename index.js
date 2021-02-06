@@ -11,7 +11,7 @@ let page;
     headless: !isDebug,
     args: ["--no-sandbox"],
   });
-  await io.mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`);
+  await io.mkdirP(`/tmp/screenshots/`);
   page = await browser.newPage();
 
   await page.evaluateOnNewDocument(function () {
