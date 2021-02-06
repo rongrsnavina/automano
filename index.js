@@ -11,7 +11,7 @@ let page;
     headless: !isDebug,
     args: ["--no-sandbox"],
   });
-  await io.mkdirP(`/tmp/screenshots/`);
+  await io.mkdirP(`screenshots`);
   page = await browser.newPage();
 
   await page.evaluateOnNewDocument(function () {
@@ -41,7 +41,7 @@ let page;
   await page.waitForTimeout(10000);
   await page.screenshot({
     fullPage: true,
-    path: `/tmp/screenshots/${new Date().getTime()}.png`,
+    path: `screenshots/${new Date().getTime()}.png`,
   });
 
   await page.waitForNavigation();
@@ -82,7 +82,7 @@ let page;
     console.log(exception);
     return page.screenshot({
       fullPage: true,
-      path: `/tmp/screenshots/${new Date().getTime()}.png`,
+      path: `screenshots/${new Date().getTime()}.png`,
     });
   })
   .finally(() => process.exit());
