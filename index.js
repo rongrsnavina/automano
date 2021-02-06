@@ -3,7 +3,7 @@ const io = require("@actions/io");
 fs.config();
 const puppeteer = require("puppeteer");
 
-const isDebug = true;
+const isDebug = false;
 let page;
 
 (async () => {
