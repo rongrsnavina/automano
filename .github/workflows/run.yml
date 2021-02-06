@@ -21,3 +21,7 @@ jobs:
         env:
           MECKANO_USER: ${{ secrets.MECKANO_USER }}
           MECKANO_PASS: ${{ secrets.MECKANO_PASS }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: "$GITHUB_WORKSPACE/screenshots/"
