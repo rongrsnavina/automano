@@ -11,7 +11,7 @@ let page;
     headless: !isDebug,
     args: ["--no-sandbox"],
   });
-  await io.mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`)
+  await io.mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`);
   page = await browser.newPage();
 
   await page.evaluateOnNewDocument(function () {
@@ -41,9 +41,7 @@ let page;
   await page.waitForTimeout(10000);
   await page.screenshot({
     fullPage: true,
-    path: `${
-      process.env.GITHUB_WORKSPACE
-    }/screenshots/${new Date().getTime()}.png`,
+    path: `/tmp/screenshots/${new Date().getTime()}.png`,
   });
 
   await page.waitForNavigation();
@@ -82,15 +80,9 @@ let page;
 })()
   .catch((exception) => {
     console.log(exception);
-    return io
-      .mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`)
-      .then(() => {
-        return page.screenshot({
-          fullPage: true,
-          path: `${
-            process.env.GITHUB_WORKSPACE
-          }/screenshots/${new Date().getTime()}.png`,
-        });
-      });
+    return page.screenshot({
+      fullPage: true,
+      path: `/tmp/screenshots/${new Date().getTime()}.png`,
+    });
   })
   .finally(() => process.exit());
