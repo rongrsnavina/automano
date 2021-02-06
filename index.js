@@ -36,13 +36,13 @@ let page;
   await page.waitForSelector("#email");
   await page.type("#email", process.env.MECKANO_USER);
   await page.type("#password", process.env.MECKANO_PASS);
-  await page.click('[name="submit"]');
+  await page.click('[value="התחברות"]');
 
-  await page.waitForTimeout(10000);
-  await page.screenshot({
-    fullPage: true,
-    path: `screenshots/${new Date().getTime()}.png`,
-  });
+  // await page.waitForTimeout(10000);
+  // await page.screenshot({
+  //   fullPage: true,
+  //   path: `screenshots/${new Date().getTime()}.png`,
+  // });
 
   await page.waitForNavigation();
 
