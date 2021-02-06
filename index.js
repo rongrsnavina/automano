@@ -36,42 +36,40 @@ let page;
 
   await page.goto("https://app.meckano.co.il/login.php");
   await page.waitForSelector("#email", { visible: true, timeout: 5000 });
-  console.log(process.env.MECKANO_USER)
-  await page.type("#email", process.env.MECKANO_USER, {delay: 100});
-  await page.type("#password", process.env.MECKANO_PASS, {delay: 100});
+  await page.type("#email", process.env.MECKANO_USER, { delay: 100 });
+  await page.type("#password", process.env.MECKANO_PASS, { delay: 100 });
   await page.click('[value="התחברות"]');
-  await page.waitForNavigation({timeout: 10000});
+  await page.waitForNavigation({ timeout: 10000 });
 
-  // if ((new Date()).getHours() < 12) {
-  //     //Checkin
-  //     if (!isDebug)
-  //         await new Promise(r => setTimeout(r, Math.floor(Math.random() * 15 * 60 * 1000)));
-  //     await page.waitForSelector('.wrapperCheckin')
-  //     await page.click('.wrapperCheckin')
-  //
-  //     try{
-  //         await page.waitForSelector('.yesNo')
-  //         await page.select('.yesNo', 'כן')
-  //         await page.click('.buttonNext')
-  //
-  //         await new Promise(r => setTimeout(r, 3000));
-  //
-  //         await page.waitForSelector('.yesNo')
-  //         await page.select('.yesNo', 'כן')
-  //         await page.click('.buttonNext')
-  //     } catch (e) {
-  //         console.log(e)
-  //     }
-  // } else {
-  //     //Checkout
-  //     if (!isDebug)
-  //         await new Promise(r => setTimeout(r, Math.floor(Math.random() * 15 * 60 * 1000)));
-  //     await page.waitForSelector('.wrapperCheckout')
-  //     await page.click('.wrapperCheckout')
-  // }
+  if (new Date().getHours() < 12) {
+    //Checkin
+    if (!isDebug)
+      await page.waitForTimeout(Math.floor(Math.random() * 15 * 60 * 1000));
+    await page.waitForSelector(".wrapperCheckin");
+    await page.click(".wrapperCheckin");
 
-  await new Promise((r) => setTimeout(r, 5000));
+    try {
+      await page.waitForSelector(".yesNo");
+      await page.select(".yesNo", "כן");
+      await page.click(".buttonNext");
 
+      await page.waitForTimeout(3000);
+
+      await page.waitForSelector(".yesNo");
+      await page.select(".yesNo", "כן");
+      await page.click(".buttonNext");
+    } catch (e) {
+      console.log(e);
+    }
+  } else {
+    //Checkout
+    if (!isDebug)
+      await page.waitForTimeout(Math.floor(Math.random() * 15 * 60 * 1000));
+    await page.waitForSelector(".wrapperCheckout");
+    await page.click(".wrapperCheckout");
+  }
+
+  await page.waitForTimeout(5000);
   await browser.close();
 })()
   .catch((exception) => {
