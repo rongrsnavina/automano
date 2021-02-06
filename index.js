@@ -38,9 +38,12 @@ let page;
   await page.type("#email", process.env.MECKANO_USER);
   await page.waitForSelector("#password", { visible: true, timeout: 5000 });
   await page.type("#password", process.env.MECKANO_PASS);
-  await page.click('[value="התחברות"]');
 
-  await page.waitForNavigation({ timeout: 10000 });
+  await Promise.all([
+    page.waitForNavigation(),
+    page.click('[value="התחברות"]'),
+  ]);
+
 
   // if ((new Date()).getHours() < 12) {
   //     //Checkin
