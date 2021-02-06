@@ -70,10 +70,10 @@ let page;
     {
         console.log(exception);
         return io.mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`).then(() =>
-            page.screenshot({
+        {return page.screenshot({
                 fullPage: true,
                 path: `${process.env.GITHUB_WORKSPACE}/screenshots/${new Date().getTime()}.png`,
-            })
+            })}
         )
     }
     ).finally(() => process.exit())
