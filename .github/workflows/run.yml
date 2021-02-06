@@ -1,5 +1,6 @@
 name: Main
 on:
+  workflow_dispatch:
   schedule:
     # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule
     # UTC 7:00, 17:00, Sunday to Thursday. actual click randomized with sleep.
