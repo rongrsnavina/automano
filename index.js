@@ -11,6 +11,7 @@ let page;
     headless: !isDebug,
     args: ["--no-sandbox"],
   });
+  await io.mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`)
   page = await browser.newPage();
 
   await page.evaluateOnNewDocument(function () {
@@ -36,7 +37,8 @@ let page;
   await page.type("#email", process.env.MECKANO_USER);
   await page.type("#password", process.env.MECKANO_PASS);
   await page.click('[name="submit"]');
-  await new Promise(r => setTimeout(r, 10000));
+
+  await page.waitForTimeout(10000);
   await page.screenshot({
     fullPage: true,
     path: `${
