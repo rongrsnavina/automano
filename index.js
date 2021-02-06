@@ -3,7 +3,7 @@ const io = require("@actions/io");
 fs.config();
 const puppeteer = require("puppeteer");
 
-const isDebug = false;
+const isDebug = true;
 let page;
 
 (async () => {
@@ -13,6 +13,7 @@ let page;
   });
   await io.mkdirP(`screenshots`);
   page = await browser.newPage();
+  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
 
   await page.evaluateOnNewDocument(function () {
     navigator.geolocation.getCurrentPosition = function (cb) {
