@@ -1,6 +1,7 @@
 const fs = require("dotenv");
-const io = require("@actions/io");
 fs.config();
+
+const io = require("@actions/io");
 const puppeteer = require("puppeteer");
 
 const isDebug = false;
@@ -13,7 +14,7 @@ let page;
   });
   await io.mkdirP(`screenshots`);
   page = await browser.newPage();
-  page.on("console", (msg) => console.log("PAGE LOG:", msg.text()));
+  // page.on("console", (msg) => console.log("PAGE LOG:", msg.text()));
 
   await page.evaluateOnNewDocument(function () {
     navigator.geolocation.getCurrentPosition = function (cb) {
@@ -35,15 +36,11 @@ let page;
 
   await page.goto("https://app.meckano.co.il/login.php");
   await page.waitForSelector("#email", { visible: true, timeout: 5000 });
-  await page.type("#email", process.env.MECKANO_USER);
-  await page.waitForSelector("#password", { visible: true, timeout: 5000 });
-  await page.type("#password", process.env.MECKANO_PASS);
-
-  await Promise.all([
-    page.waitForNavigation(),
-    page.click('[value="התחברות"]'),
-  ]);
-
+  console.log(process.env.MECKANO_USER)
+  await page.type("#email", process.env.MECKANO_USER, {delay: 100});
+  await page.type("#password", process.env.MECKANO_PASS, {delay: 100});
+  await page.click('[value="התחברות"]');
+  await page.waitForNavigation({timeout: 10000});
 
   // if ((new Date()).getHours() < 12) {
   //     //Checkin
