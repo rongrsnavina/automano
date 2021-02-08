@@ -11,3 +11,4 @@ https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling
 
 ## TODO
 * Do not run on Israeli holidays
+* Notify on succesfull checkin\checkout (Slack, email, etc.)
