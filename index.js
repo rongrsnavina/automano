@@ -74,9 +74,9 @@ let page;
 })()
   .catch((exception) => {
     console.log(exception);
-    return page.screenshot({
-      fullPage: true,
-      path: `screenshots/${new Date().getTime()}.png`,
-    });
+//     return page.screenshot({
+//       fullPage: true,
+//       path: `screenshots/${new Date().getTime()}.png`,
+//     });
   })
   .finally(() => process.exit());
