@@ -44,7 +44,7 @@ let page;
   if (new Date().getHours() < 12) {
     //Checkin
     if (!isDebug)
-      await page.waitForTimeout(Math.floor(Math.random() * 20 * 60 * 1000));
+      await page.waitForTimeout(Math.floor(Math.random() * 15 * 60 * 1000));
     await page.waitForSelector(".wrapperCheckin");
     await page.click(".wrapperCheckin");
 
@@ -64,7 +64,7 @@ let page;
   } else {
     //Checkout
     if (!isDebug)
-      await page.waitForTimeout(Math.floor(Math.random() * 20 * 60 * 1000));
+      await page.waitForTimeout(Math.floor(Math.random() * 15 * 60 * 1000));
     await page.waitForSelector(".wrapperCheckout");
     await page.click(".wrapperCheckout");
   }
